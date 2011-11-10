@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the colors module.
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function colors_schema() {
+  $schema['colors'] = array(
+    'description' => 'Stores selectors and their matching colors.',
+    'fields' => array(
+      'selector' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Unique selector name.',
+        'translatable' => TRUE,
+      ),
+      'color' => array(
+        'type' => 'blob',
+        'not null' => TRUE,
+        'description' => 'Color configuration array.',
+        'size' => 'big',
+        'serialize' => TRUE
+      ),
+      'module' => array(
+        'type' => 'varchar',
+        'length' => 128,
+        'not null' => TRUE,
+        'default' => 'colors',
+        'description' => 'Module that created the color configuration.',
+        'translatable' => TRUE,
+      ),
+    ),
+    'primary key' => array('selector'),
+  );
+  return $schema;
+}
